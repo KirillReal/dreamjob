@@ -1,2 +1,4 @@
-model\Candidate.class
-model\User.class
+ru\job4j\dream\model\User.class
+ru\job4j\dream\model\Candidate.class
+ru\job4j\dream\model\Post.class
+ru\job4j\dream\store\Store.class
