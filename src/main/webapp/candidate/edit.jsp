@@ -35,17 +35,17 @@
                 Кандидат
             </div>
             <div class="card-body">
-                <form>
+                <form action="<%=request.getContextPath()%>/candidate/save" method="post">
                     <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" class="form-control">
+                        <label>Должность</label>
+                        <input type="text" class="form-control" name="position">
                     </div>
                     <div class="form-group">
                         <label>Фамилия</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Должность</label>
+                        <label>Имя</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
