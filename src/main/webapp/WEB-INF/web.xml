@@ -16,11 +16,11 @@
   <url-pattern>/posts.do</url-pattern>
 </servlet-mapping>
   <servlet>
-    <servlet-name>CandidatesServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.CandidatesServlet</servlet-class>
+    <servlet-name>CandidateServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CandidatesServlet</servlet-name>
+    <servlet-name>CandidateServlet</servlet-name>
     <url-pattern>/candidates.do</url-pattern>
   </servlet-mapping>
   <servlet>
