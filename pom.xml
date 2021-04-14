@@ -32,4 +32,12 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Internal repo</name>
+      <url>file:///home/thara/testesb/in</url>
+    </repository>
+  </distributionManagement>
 </project>
