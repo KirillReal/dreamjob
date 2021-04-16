@@ -16,5 +16,5 @@ public interface Store {
 
     Post findById(int id);
 
-    Candidate findByCandidateId (int id);
+    Candidate findByCandidateId(int id);
 }

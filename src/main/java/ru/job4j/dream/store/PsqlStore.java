@@ -77,10 +77,10 @@ public class PsqlStore implements Store {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    candidates.add(new Candidate(it.getInt("id"),it.getString("name")));
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name")));
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return candidates;
@@ -97,7 +97,8 @@ public class PsqlStore implements Store {
 
     private Post create(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("INSERT INTO post(name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps =  cn.prepareStatement("INSERT INTO post(name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
             ps.execute();
@@ -115,11 +116,11 @@ public class PsqlStore implements Store {
     private void update(Post post) {
         try (Connection cn = pool.getConnection();
         PreparedStatement ps = cn.prepareStatement("UPDATE post set name=? where id=? ")) {
-            ps.setString(1,post.getName());
-            ps.setInt(2,post.getId());
+            ps.setString(1, post.getName());
+            ps.setInt(2, post.getId());
             ps.executeUpdate();
-        }catch (SQLException throwable) {
-            LOG.error("db exception",throwable);
+        } catch (SQLException throwable) {
+            LOG.error("db exception", throwable);
         }
     }
 
@@ -128,15 +129,15 @@ public class PsqlStore implements Store {
         Post post = null;
         try (Connection cn = pool.getConnection();
         PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
-                if(resultSet.next()) {
+                if (resultSet.next()) {
                     post = new Post(resultSet.getInt(1),
                             resultSet.getString(2));
                 }
             }
-        }catch (SQLException throwable) {
-            LOG.error("db exception",throwable);
+        } catch (SQLException throwable) {
+            LOG.error("db exception", throwable);
         }
         return post;
     }
@@ -183,19 +184,19 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public Candidate findByCandidateId (int id) {
+    public Candidate findByCandidateId(int id) {
         Candidate candidate = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
-                if(resultSet.next()) {
+                if (resultSet.next()) {
                     candidate = new Candidate(resultSet.getInt(1),
                             resultSet.getString(2));
                 }
             }
-        }catch (SQLException throwable) {
-            LOG.error("db exception",throwable);
+        } catch (SQLException throwable) {
+            LOG.error("db exception", throwable);
         }
         return candidate;
     }
