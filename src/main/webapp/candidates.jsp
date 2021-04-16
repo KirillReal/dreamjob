@@ -6,10 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.store.Store" %>
+<%@ page import="ru.job4j.dream.store.MemStore" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="java.util.Collection" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -50,7 +50,7 @@
                     <c:forEach items="${candidates}" var="candidate">
                         <tr>
                             <td>
-                                <a href='<c:url value="/post/edit.jsp?id=${candidate.id}"/>'>
+                                <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                                 <c:out value="${candidate.name}"/>
