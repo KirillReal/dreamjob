@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MemStore {
+public class MemStore implements Store {
     private static final MemStore INST = new MemStore();
 
     private static final AtomicInteger POST_ID = new AtomicInteger(4);

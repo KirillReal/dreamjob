@@ -1,5 +1,6 @@
 package ru.job4j.dream.store;
 
+import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 
 public class PsqlMain {
@@ -8,6 +9,10 @@ public class PsqlMain {
         store.save(new Post(0, "Java Job"));
         for (Post post : store.findAllPosts()) {
             System.out.println(post.getId() + " " + post.getName());
+        }
+        store.save(new Candidate(0,"Java Job"));
+        for (Candidate can: store.findAllCandidates()) {
+            System.out.println(can.getId() + " " + can.getName());
         }
     }
 }

@@ -124,7 +124,7 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public Post findPostById(int id) {
+    public Post findById(int id) {
         Post post = null;
         try (Connection cn = pool.getConnection();
         PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
@@ -142,7 +142,7 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public void saveCandidate(Candidate candidate) {
+    public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             create(candidate);
         } else {
@@ -183,7 +183,7 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public Candidate findCandidateById (int id) {
+    public Candidate findByCandidateId (int id) {
         Candidate candidate = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
