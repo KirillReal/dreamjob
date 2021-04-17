@@ -64,7 +64,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error" ,e);
+            LOG.error("Error", e);
         }
         return posts;
     }
@@ -81,7 +81,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error("Error",e);
+            LOG.error("Error", e);
         }
         return candidates;
     }
@@ -108,7 +108,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception trow) {
-            LOG.error("There was an error creating",trow);
+            LOG.error("There was an error creating", trow);
         }
         return post;
     }
