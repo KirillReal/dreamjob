@@ -64,7 +64,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error" ,e);
         }
         return posts;
     }
@@ -81,7 +81,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error",e);
         }
         return candidates;
     }
@@ -107,8 +107,8 @@ public class PsqlStore implements Store {
                     post.setId(id.getInt(1));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception trow) {
+            LOG.error("There was an error creating",trow);
         }
         return post;
     }
@@ -120,7 +120,7 @@ public class PsqlStore implements Store {
             ps.setInt(2, post.getId());
             ps.executeUpdate();
         } catch (SQLException throwable) {
-            LOG.error("db exception", throwable);
+            LOG.error("Update error", throwable);
         }
     }
 
@@ -137,7 +137,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (SQLException throwable) {
-            LOG.error("db exception", throwable);
+            LOG.error("No post with this id was found", throwable);
         }
         return post;
     }
@@ -166,7 +166,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error("db ex", e);
+            LOG.error("There was an error creating", e);
         }
         return candidate;
     }
@@ -179,7 +179,7 @@ public class PsqlStore implements Store {
             statement.setInt(2, candidate.getId());
             statement.executeUpdate();
         } catch (SQLException throwable) {
-            LOG.error("db ex", throwable);
+            LOG.error("Update error", throwable);
         }
     }
 
@@ -196,7 +196,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (SQLException throwable) {
-            LOG.error("db exception", throwable);
+            LOG.error("No candidate with this id was found", throwable);
         }
         return candidate;
     }
