@@ -126,9 +126,9 @@ public class PsqlStore implements Store {
 
     @Override
     public Post findById(int id) {
-        Post post = null;
+        Post post = new Post(0, "");
         try (Connection cn = pool.getConnection();
-        PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
+             PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
@@ -154,11 +154,10 @@ public class PsqlStore implements Store {
     private Candidate create(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO candidate(name, cityId) VALUES (?, ?)",
+                     "INSERT INTO candidate(name) VALUES (?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -174,7 +173,7 @@ public class PsqlStore implements Store {
     private void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement statement = cn.prepareStatement(
-                     "UPDATE candidate set name = (?), cityId = (?) where id= (?) ")) {
+                     "UPDATE candidate set name = ?, where id= ? ")) {
             statement.setString(1, candidate.getName());
             statement.setInt(2, candidate.getId());
             statement.executeUpdate();
@@ -185,9 +184,9 @@ public class PsqlStore implements Store {
 
     @Override
     public Candidate findByCandidateId(int id) {
-        Candidate candidate = null;
+        Candidate candidate = new Candidate(0, "");
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
+             PreparedStatement ps = cn.prepareStatement("SELECT FROM candidate where id=?")) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
