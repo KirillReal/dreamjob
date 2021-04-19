@@ -17,4 +17,14 @@ public interface Store {
     Post findById(int id);
 
     Candidate findByCandidateId(int id);
+
+    String getImage(int id);
+
+    int saveImage(String name);
+
+    void updateCandidatePhoto(int idCandidate, int idPhoto);
+
+    void deletePhoto(int idPhoto);
+
+    void deleteCan(int idCandidate);
 }

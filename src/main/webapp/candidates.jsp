@@ -29,6 +29,24 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="container pt-3">
 
     <div class="row">
@@ -40,7 +58,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Удалить кандидата</th>
+                        <th scope="col">Скачать картинку</th>
+                        <th scope="col">Аватар</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +72,14 @@
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                                 <c:out value="${candidate.name}"/>
+                            </td>
+                            <td>
+                                <a href='<c:url value="/delete?canID=${candidate.id}&photoID=${candidate.photoId}"/>'>Delete</a>
+                            </td>
+                            <td><a href="<c:url value='/download?name=${candidate.photoId}'/>">Download</a></td>
+                            <td>
+                                <img src="<c:url value='/download?name=${candidate.photoId}'/>" width="100px"
+                                     height="100px"/>
                             </td>
                         </tr>
                     </c:forEach>

@@ -30,7 +30,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "");
+    Candidate candidate = new Candidate(0, "",0);
     if (id != null) {
         candidate = PsqlStore.instOf().findByCandidateId(Integer.parseInt(id));
     }
@@ -49,7 +49,7 @@
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>Должность</label>
-                        <input type="text" class="form-control" name="position" value="<%=candidate.getName()%>">
+                        <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
                     </div>
                     <div class="form-group">
                         <label>Фамилия</label>

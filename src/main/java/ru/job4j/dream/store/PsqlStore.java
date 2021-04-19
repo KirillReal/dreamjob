@@ -77,7 +77,8 @@ public class PsqlStore implements Store {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    candidates.add(new Candidate(it.getInt("id"), it.getString("name")));
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
+                            it.getInt(3)));
                 }
             }
         } catch (Exception e) {
@@ -115,7 +116,7 @@ public class PsqlStore implements Store {
 
     private void update(Post post) {
         try (Connection cn = pool.getConnection();
-        PreparedStatement ps = cn.prepareStatement("UPDATE post set name=? where id=? ")) {
+        PreparedStatement ps = cn.prepareStatement("UPDATE post set name= (?) where id= (?) ")) {
             ps.setString(1, post.getName());
             ps.setInt(2, post.getId());
             ps.executeUpdate();
@@ -128,7 +129,7 @@ public class PsqlStore implements Store {
     public Post findById(int id) {
         Post post = new Post(0, "");
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT FROM post where id=?")) {
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post where id=?")) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
@@ -173,7 +174,7 @@ public class PsqlStore implements Store {
     private void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement statement = cn.prepareStatement(
-                     "UPDATE candidate set name = ?, where id= ? ")) {
+                     "UPDATE candidate set name=?  where id=? ")) {
             statement.setString(1, candidate.getName());
             statement.setInt(2, candidate.getId());
             statement.executeUpdate();
@@ -184,19 +185,93 @@ public class PsqlStore implements Store {
 
     @Override
     public Candidate findByCandidateId(int id) {
-        Candidate candidate = new Candidate(0, "");
+        Candidate candidate = new Candidate(0, "",0);
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT FROM candidate where id=?")) {
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate where id= (?)")) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
                     candidate = new Candidate(resultSet.getInt(1),
-                            resultSet.getString(2));
+                            resultSet.getString(2),
+                            resultSet.getInt(3));
                 }
             }
         } catch (SQLException throwable) {
             LOG.error("No candidate with this id was found", throwable);
         }
         return candidate;
+    }
+
+    @Override
+    public String getImage(int id) {
+        String result = "";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement("SELECT * FROM photos WHERE id = (?)")
+        ) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    result = resultSet.getString(2);
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("db ex", e);
+        }
+        return result;
+    }
+
+    @Override
+    public int saveImage(String name) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO photos (name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, name);
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    return id.getInt(1);
+                }
+            }
+        } catch (SQLException throwables) {
+            LOG.error("db ex", throwables);
+        }
+        return 0;
+    }
+
+    @Override
+    public void updateCandidatePhoto(int idCandidate, int idPhoto) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement(
+                     "UPDATE candidate set photoId= (?) where id= (?)")) {
+            statement.setInt(1, idPhoto);
+            statement.setInt(2, idCandidate);
+            statement.executeUpdate();
+        } catch (SQLException throwable) {
+            LOG.error("db ex", throwable);
+        }
+    }
+
+    @Override
+    public void deletePhoto(int idPhoto) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement(
+                     "DELETE FROM photos where id= (?)")) {
+            statement.setInt(1, idPhoto);
+            statement.executeUpdate();
+        } catch (SQLException throwable) {
+            LOG.error("db ex", throwable);
+        }
+    }
+
+    @Override
+    public void deleteCan(int idCandidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement(
+                     "DELETE FROM candidate where id= (?)")) {
+            statement.setInt(1, idCandidate);
+            statement.executeUpdate();
+        } catch (SQLException throwable) {
+            LOG.error("db ex", throwable);
+        }
     }
 }
