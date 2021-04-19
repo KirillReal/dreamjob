@@ -11,7 +11,8 @@ import java.io.IOException;
 
 public class AuthServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         if ("root@local".equals(email) && "root".equals(password)) {
@@ -19,7 +20,7 @@ public class AuthServlet extends HttpServlet {
             User admin = new User();
             admin.setName("Admin");
             admin.setEmail(email);
-            sc.setAttribute("user",admin);
+            sc.setAttribute("user", admin);
             resp.sendRedirect(req.getContextPath() + "/posts.do");
         } else {
             req.setAttribute("error", "Не верный email или пароль");
