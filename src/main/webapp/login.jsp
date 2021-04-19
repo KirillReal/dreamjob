@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kiril
@@ -33,6 +34,11 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
+                <c:if test="${not empty error}">
+                    <div style="color:#ff0000; font-weight: bold; margin: 30px 0;">
+                        <c:out value="${error}"/>
+                    </div>
+                </c:if>
                 Авторизация
             </div>
             <div class="card-body">
@@ -51,5 +57,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
