@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.util.Collection;
 import java.util.Map;
@@ -82,5 +83,30 @@ public class MemStore implements Store {
     @Override
     public void deleteCan(int idCandidate) {
 
+    }
+
+    @Override
+    public User createUser(User user) {
+        return null;
+    }
+
+    @Override
+    public void updateUser(User user) {
+
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return null;
+    }
+
+    @Override
+    public Collection<User> findAllUsers() {
+        return null;
+    }
+
+    @Override
+    public User findByEmailUser(String email) {
+        return null;
     }
 }

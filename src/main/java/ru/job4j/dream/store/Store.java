@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.util.Collection;
 
@@ -27,4 +28,14 @@ public interface Store {
     void deletePhoto(int idPhoto);
 
     void deleteCan(int idCandidate);
+
+    User createUser(User user);
+
+    void updateUser(User user);
+
+    User findUserById(int id);
+
+    Collection<User> findAllUsers();
+
+    User findByEmailUser(String email);
 }
