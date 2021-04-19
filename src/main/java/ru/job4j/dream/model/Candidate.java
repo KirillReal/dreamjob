@@ -7,7 +7,7 @@ public class Candidate {
     private String name;
     private int photoId;
 
-    public Candidate(int id, String name,int photoId) {
+    public Candidate(int id, String name, int photoId) {
         this.id = id;
         this.name = name;
         this.photoId = photoId;

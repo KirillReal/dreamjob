@@ -185,7 +185,7 @@ public class PsqlStore implements Store {
 
     @Override
     public Candidate findByCandidateId(int id) {
-        Candidate candidate = new Candidate(0, "",0);
+        Candidate candidate = new Candidate(0, "", 0);
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate where id= (?)")) {
             ps.setInt(1, id);
@@ -206,7 +206,8 @@ public class PsqlStore implements Store {
     public String getImage(int id) {
         String result = "";
         try (Connection cn = pool.getConnection();
-             PreparedStatement statement = cn.prepareStatement("SELECT * FROM photos WHERE id = (?)")
+             PreparedStatement statement = cn
+                     .prepareStatement("SELECT * FROM photos WHERE id = (?)")
         ) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
