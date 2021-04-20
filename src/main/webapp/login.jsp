@@ -53,6 +53,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
                 </form>
+                <form action="<%=request.getContextPath()%>/reg.do" method="get">
+                    <button type="submit" class="btn btn-primary">Регистрация</button>
+                </form>
             </div>
         </div>
     </div>
