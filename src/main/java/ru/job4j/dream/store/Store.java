@@ -31,11 +31,5 @@ public interface Store {
 
     User createUser(User user);
 
-    void updateUser(User user);
-
-    User findUserById(int id);
-
-    Collection<User> findAllUsers();
-
     User findByEmailUser(String email);
 }

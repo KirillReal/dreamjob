@@ -299,59 +299,6 @@ public class PsqlStore implements Store {
         return user;
     }
 
-    @Override
-    public void updateUser(User user) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement statement = cn.prepareStatement(
-                     "UPDATE users set name= (?), email= (?), password= (?)"
-                             + " where id= (?) ")) {
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setInt(4, user.getId());
-            statement.executeUpdate();
-        } catch (SQLException throwable) {
-            LOG.error("Update error", throwable);
-        }
-    }
-
-    @Override
-    public User findUserById(int id) {
-        User user = new User();
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM users where id= (?)")) {
-            ps.setInt(1, id);
-            try (ResultSet resultSet = ps.executeQuery()) {
-                if (resultSet.next()) {
-                    user = new User(resultSet.getInt(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4));
-                }
-            }
-        } catch (SQLException throwable) {
-            LOG.error("No candidate with this id was found", throwable);
-        }
-        return user;
-    }
-
-    @Override
-    public Collection<User> findAllUsers() {
-        List<User> users = new ArrayList<>();
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM users")
-        ) {
-            try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
-                    users.add(new User(it.getInt(1), it.getString(2),
-                            it.getString(3), it.getString(4)));
-                }
-            }
-        } catch (Exception e) {
-            LOG.error("Error", e);
-        }
-        return users;
-    }
 
     @Override
     public User findByEmailUser(String email) {
@@ -361,7 +308,7 @@ public class PsqlStore implements Store {
              PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
+                if (it.next()) {
                     user = new User(Integer.parseInt(it.getString("id")),
                             it.getString("name"),
                             it.getString("email"),
