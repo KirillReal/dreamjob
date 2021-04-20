@@ -14,6 +14,7 @@ public interface Store {
     void save(Post post);
 
     void save(Candidate candidate);
+    void save(User user);
 
     Post findById(int id);
 
@@ -30,6 +31,8 @@ public interface Store {
     void deleteCan(int idCandidate);
 
     User createUser(User user);
+
+    void updateUser(User user);
 
     User findByEmailUser(String email);
 }

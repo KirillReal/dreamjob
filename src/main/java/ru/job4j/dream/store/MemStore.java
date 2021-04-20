@@ -52,6 +52,11 @@ public class MemStore implements Store {
         candidates.put(candidate.getId(), candidate);
     }
 
+    @Override
+    public void save(User user) {
+
+    }
+
     public Post findById(int id) {
         return posts.get(id);
     }
@@ -88,6 +93,11 @@ public class MemStore implements Store {
     @Override
     public User createUser(User user) {
         return null;
+    }
+
+    @Override
+    public void updateUser(User user) {
+
     }
 
     @Override

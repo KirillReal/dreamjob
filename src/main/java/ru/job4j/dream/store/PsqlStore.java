@@ -172,6 +172,15 @@ public class PsqlStore implements Store {
         return candidate;
     }
 
+    @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            createUser(user);
+        } else {
+            updateUser(user);
+        }
+    }
+
     private void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement statement = cn.prepareStatement(
@@ -297,6 +306,22 @@ public class PsqlStore implements Store {
             LOG.error("There was an error creating", e);
         }
         return user;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement(
+                     "UPDATE users set name= (?), email= (?), password= (?)"
+                             + " where id= (?) ")) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPassword());
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException throwable) {
+            LOG.error("Update error", throwable);
+        }
     }
 
     @Override
