@@ -56,8 +56,6 @@ public class UploadServlet extends HttpServlet {
                     }
                     idPhoto = store.saveImage(file.getPath());
                     System.out.println(idPhoto);
-//                } else {
-//                    idCandidate = Integer.parseInt(item.getString());
                 }
                 store.updateCandidatePhoto(idCan, idPhoto);
             }
