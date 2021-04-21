@@ -12,38 +12,32 @@
 
 <div class="container-fluid">
     <h2>My First Bootstrap Page</h2>
-    <p>The form below contains two input elements; one of type text and one of type password:</p>
+    <p>The form below contains three input elements; one of type name,one of type surname and description:</p>
+</div>
     <form>
         <div class="form-group">
-            <label for="usr">Name:</label>
-            <input type="text" class="form-control" title="Enter user name." id="usr">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
+            <label for="surname">Surname:</label>
+            <input type="text" class="form-control" id="surname">
         </div>
-        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        <div class="form-group">
+            <label class="radio-inline"><input type="radio" name="gender" checked>male</label>
+            <label class="radio-inline"><input type="radio" name="gender">female</label>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description"></textarea>
+        </div>
     </form>
-</div>
+        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        <button type="button" class="btn btn-default" onclick="return addRow();">Save</button>
+    </form>
 
-<form>
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name">
-    </div>
-    <div class="form-group">
-        <label for="surname">Surname:</label>
-        <input type="text" class="form-control" id="surname">
-    </div>
-    <div class="form-group">
-        <label class="radio-inline"><input type="radio" name="gender" checked>male</label>
-        <label class="radio-inline"><input type="radio" name="gender">female</label>
-    </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" id="description"></textarea>
-    </div>
-</form>
+
+
 <script>
     function validate() {
         let name = $("#name").val();
@@ -68,6 +62,26 @@
             error += "Enter description.\n";
         }
         return error;
+    }
+
+    function addRow() {
+        let name = $("#name").val();
+        let surname = $("#surname").val();
+        let gender = $("input[name='gender']:checked").val();
+        let description = $("#description").val();
+        let error = valid(name,surname,description);
+        if (error !== "") {
+            alert(error);
+            return false;
+        }
+        $("#table tr:last").after(
+            "<tr>" +
+            "<td>" + name +"</td>" +
+            "<td>" + surname +"</td>" +
+            "<td>" + gender +"</td>" +
+            "<td>" + description +"</td>" +
+            "</tr>"
+        );
     }
 </script>
 <h2 style="margin-top: 40px;">Table</h2>
