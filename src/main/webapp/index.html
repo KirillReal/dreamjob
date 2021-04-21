@@ -11,8 +11,19 @@
 <body class="container">
 
 <div class="container-fluid">
-    <h1>My First Bootstrap Page</h1>
-    <p>This is some text.</p>
+    <h2>My First Bootstrap Page</h2>
+    <p>The form below contains two input elements; one of type text and one of type password:</p>
+    <form>
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" title="Enter user name." id="usr">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+    </form>
 </div>
 
 <form>
@@ -32,9 +43,33 @@
         <label for="description">Description:</label>
         <textarea class="form-control" id="description"></textarea>
     </div>
-    <button type="button" class="btn btn-default" onclick="return validate();">Validate</button>
-    <button type="button" class="btn btn-default" onclick="return save();">Save</button>
 </form>
+<script>
+    function validate() {
+        let name = $("#name").val();
+        let surname = $("#surname").val();
+        let description = $("#description").val();
+        let error = valid(name,surname,description);
+        if (error !== "") {
+            alert(error);
+        }
+        return false;
+    }
+
+    function valid(name,surname,description) {
+        let error = "";
+        if (name === "") {
+            error += "Enter name.\n";
+        }
+        if (surname === "") {
+            error += "Enter surname.\n";
+        }
+        if (description === "") {
+            error += "Enter description.\n";
+        }
+        return error;
+    }
+</script>
 <h2 style="margin-top: 40px;">Table</h2>
 <table class="table" id="table">
     <thead>
