@@ -12,15 +12,32 @@
     function sendGreeting() {
         $.ajax({
             type: 'GET',
+            crossDomain: true,
             url:'http://localhost:8080/dreamjob/greet',
-            data: 'name=' + $('#exampleInputEmail1').val(),
-            dataType: 'text'
+            data: {text : $('#exampleInputEmail1').val},
+            dataType: 'json'
         }).done(function (data) {
-            $('#text').text(data);
+            $('#text').text(JSON.stringify(data.email));
         }).fail(function (err) {
             alert(err);
         });
     }
+
+    function sendJson() {
+        let data = {name: $('#exampleInputEmail1').val()};
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/dreamjob/greet",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+        }).done(function(data) {
+            $(".result").text(data.answer);
+        }).fail(function(err){
+            alert(err);
+        });
+    }
+
+
 </script>
 <div class="container">
     <p id="text"></p>
@@ -29,7 +46,11 @@
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
+        <div class="form-group">
+            <p class="result"></p>
+        </div>
         <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="sendJson()">JSON</button>
     </form>
 </div>
 </body>
