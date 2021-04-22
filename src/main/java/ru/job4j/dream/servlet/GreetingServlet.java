@@ -25,8 +25,8 @@ public class GreetingServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req,HttpServletResponse res)
-        throws ServletException,IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+        throws ServletException, IOException {
         JsonObject data = new Gson().fromJson(req.getReader(), JsonObject.class);
         String name = data.get("name").getAsString();
         String answer = "Nice to meet you, " + name;
