@@ -21,9 +21,7 @@ public class MemStore implements Store {
         posts.put(1, new Post(1, "Junior Java Job"));
         posts.put(2, new Post(2, "Middle Java Job"));
         posts.put(3, new Post(3, "Senior Java Job"));
-        candidates.put(1, new Candidate(1, "Junior Java", 0));
-        candidates.put(2, new Candidate(2, "Middle Java", 0));
-        candidates.put(3, new Candidate(3, "Senior Java", 0));
+
     }
 
     public static MemStore instOf() {
@@ -102,6 +100,31 @@ public class MemStore implements Store {
 
     @Override
     public User findByEmailUser(String email) {
+        return null;
+    }
+
+    @Override
+    public int saveCity(String name) {
+        return 0;
+    }
+
+    @Override
+    public void updateCandidateCity(int idCandidate, int idCity) {
+
+    }
+
+    @Override
+    public void deleteCity(int idCity) {
+
+    }
+
+    @Override
+    public Collection<String> findAllCities() {
+        return null;
+    }
+
+    @Override
+    public String findByIdCity(int id) {
         return null;
     }
 }

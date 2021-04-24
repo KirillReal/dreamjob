@@ -14,8 +14,10 @@ public class DeleteServlet extends HttpServlet {
             ServletException, IOException {
         int idPhoto = Integer.parseInt(req.getParameter("photoID"));
         int idCan = Integer.parseInt(req.getParameter("canID"));
+        int idCity = Integer.parseInt(req.getParameter("cityId"));
         PsqlStore.instOf().deleteCan(idCan);
         PsqlStore.instOf().deletePhoto(idPhoto);
+        PsqlStore.instOf().deleteCity(idCity);
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
