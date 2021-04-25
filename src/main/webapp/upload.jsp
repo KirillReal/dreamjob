@@ -71,6 +71,5 @@
         <button type="submit" class="btn btn-primary" onclick="return validate()">Submit</button>
     </form>
 </div>
-
 </body>
 </html>

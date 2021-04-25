@@ -61,5 +61,4 @@ public class UploadServlet extends HttpServlet {
         }
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
-
 }

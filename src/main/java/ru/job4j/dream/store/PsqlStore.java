@@ -156,7 +156,7 @@ public class PsqlStore implements Store {
     private Candidate create(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO candidate(name,city_id) VALUES (?,?)",
+                     "INSERT INTO candidate(name,cityId) VALUES (?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
@@ -185,7 +185,7 @@ public class PsqlStore implements Store {
     private void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement statement = cn.prepareStatement(
-                     "UPDATE candidate set name = (?), city_id = (?)  where id=? ")) {
+                     "UPDATE candidate set name = (?), cityId = (?)  where id=(?) ")) {
             statement.setString(1, candidate.getName());
             statement.setInt(2, candidate.getCityId());
             statement.setInt(3, candidate.getId());
@@ -412,7 +412,7 @@ public class PsqlStore implements Store {
 
     @Override
     public String findByIdCity(int id) {
-        String city = "";
+        String city = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM city where id= (?)")) {
             ps.setInt(1, id);

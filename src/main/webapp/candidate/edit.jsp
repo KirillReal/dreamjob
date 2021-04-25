@@ -51,9 +51,11 @@
             let name = $('#name').val();
             let city = $('#city').val();
             console.log(city);
-            if(name === '' || city === '0') {
+            if((name === '') || (city === '0')) {
                 alert('all input tables required');
                 result = false;
+            }else {
+                $(".js-candidate").submit();
             }
             return result;
         }
@@ -94,7 +96,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Резюме кандидата
+                Новый кандидат
                 <% } else { %>
                 Редактировать резюме.
                 <% } %>
