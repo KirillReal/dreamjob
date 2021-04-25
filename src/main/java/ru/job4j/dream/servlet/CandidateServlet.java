@@ -34,6 +34,5 @@ public class CandidateServlet extends HttpServlet {
                 0, Integer.parseInt(req.getParameter("cityValue")));
         PsqlStore.instOf().save(candidate);
         resp.sendRedirect(req.getContextPath() + "/upload" + "?candidateId=" + candidate.getId());
-        //resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

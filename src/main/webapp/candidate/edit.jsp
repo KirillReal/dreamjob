@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kiril
@@ -100,26 +101,26 @@
             </div>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
-                    <input type="text" class="form-control" id="name" name="name" value="<%=candidate.getName()%>">
                     <label>Город:</label>
                     <div>
                         <select id="city" name="cityValue" onchange="OnSelectionChange (this)">
                             <option value=0>Выберите город</option>
                         </select>
                     </div>
-                    </br>
+
                     <div class="form-group">
                         <label>Фамилия</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="name" name="name" value="<%=candidate.getName()%>">
                     </div>
                     <div class="form-group">
                         <label>Опыт работы</label>
                         <input type="text" class="form-control">
                     </div>
+                    </br>
                     <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>
                 </form>
             </div>
