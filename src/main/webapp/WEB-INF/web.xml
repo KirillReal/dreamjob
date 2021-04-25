@@ -71,6 +71,14 @@
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>CORSFilter</filter-name>
+    <filter-class>ru.job4j.dream.filter.CORSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CORSFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>RegServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
@@ -95,4 +103,5 @@
     <servlet-name>CityServlet</servlet-name>
     <url-pattern>/city</url-pattern>
   </servlet-mapping>
+
 </web-app>
