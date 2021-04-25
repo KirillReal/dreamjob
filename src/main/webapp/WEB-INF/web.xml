@@ -95,13 +95,4 @@
     <servlet-name>CityServlet</servlet-name>
     <url-pattern>/city</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.LogoutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout.do</url-pattern>
-  </servlet-mapping>
-
 </web-app>

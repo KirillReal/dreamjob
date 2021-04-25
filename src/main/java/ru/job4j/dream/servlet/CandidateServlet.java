@@ -16,12 +16,12 @@ public class CandidateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("candidates", PsqlStore.instOf().findAllCandidates());
         Collection<Candidate> candidates = PsqlStore.instOf().findAllCandidates();
+        req.setAttribute("candidates", candidates);
         Map<Integer, String> map = new HashMap<>();
         candidates.stream().map(Candidate::getCityId).
                 forEach(id -> map.put(id, PsqlStore.instOf().findByIdCity(id)));
-        req.setAttribute("candidates", candidates);
+        req.setAttribute("user", req.getSession().getAttribute("user"));
         req.setAttribute("cities", map);
         req.getRequestDispatcher("candidates.jsp").forward(req, resp);
     }

@@ -128,7 +128,7 @@ public class PsqlStore implements Store {
 
     @Override
     public Post findById(int id) {
-        Post post = new Post(0, "");
+        Post post = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM post where id=?")) {
             ps.setInt(1, id);
@@ -197,7 +197,7 @@ public class PsqlStore implements Store {
 
     @Override
     public Candidate findByCandidateId(int id) {
-        Candidate candidate = new Candidate(0, "", 0, 0);
+        Candidate candidate = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate where id= (?)")) {
             ps.setInt(1, id);
@@ -293,7 +293,7 @@ public class PsqlStore implements Store {
     public User createUser(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO users" + "(name,email,password) VALUES (?)",
+                     "INSERT INTO users" + "(name,email,password) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, user.getName());
@@ -329,11 +329,12 @@ public class PsqlStore implements Store {
 
     @Override
     public User findByEmailUser(String email) {
-        User user = new User();
+        User user = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM users where email = (?)",
              PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
+            ps.setString(1, email);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     user = new User(Integer.parseInt(it.getString("id")),

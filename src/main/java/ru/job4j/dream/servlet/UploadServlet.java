@@ -16,17 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class UploadServlet extends HttpServlet {
-    private int idCan;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        idCan = Integer.parseInt(req.getParameter("candidateId"));
+        req.setAttribute("user", req.getSession().getAttribute("user"));
+        req.setAttribute("candidateId", Integer.parseInt(req.getParameter("candidateId")));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/upload.jsp");
         dispatcher.forward(req, resp);
     }
@@ -40,7 +38,7 @@ public class UploadServlet extends HttpServlet {
         factory.setRepository(repository);
         ServletFileUpload upload = new ServletFileUpload(factory);
         Store store = PsqlStore.instOf();
-        int idCandidate = idCan;
+        int idCandidate = Integer.parseInt(req.getParameter("candidateId"));
         int idPhoto = 0;
         try {
             List<FileItem> items = upload.parseRequest(req);
@@ -55,14 +53,13 @@ public class UploadServlet extends HttpServlet {
                         out.write(item.getInputStream().readAllBytes());
                     }
                     idPhoto = store.saveImage(file.getPath());
-                    System.out.println(idPhoto);
                 }
-                store.updateCandidatePhoto(idCan, idPhoto);
+                store.updateCandidatePhoto(idCandidate, idPhoto);
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        doGet(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 
 }
