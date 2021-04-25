@@ -8,3 +8,5 @@
 
 ![ScreenShot](images/Posts.png)
 
+![ScreenShot](images/Candidates.png)
+
