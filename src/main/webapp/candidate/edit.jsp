@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kiril
@@ -9,6 +8,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,14 +51,13 @@
             let name = $('#name').val();
             let city = $('#city').val();
             console.log(city);
-            if((name === '') || (city === '0')) {
+            if ((name === '') || (city === '0')) {
                 alert('all input tables required');
                 result = false;
-            }else {
-                $(".js-candidate").submit();
             }
             return result;
         }
+
     </script>
     <title>Работа мечты</title>
 </head>
@@ -103,27 +102,18 @@
             </div>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
-                    <label>Город:</label>
-                    <div>
-                        <select id="city" name="cityValue" onchange="OnSelectionChange (this)">
-                            <option value=0>Выберите город</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Фамилия</label>
-                        <input type="text" class="form-control">
-                    </div>
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" class="form-control" id="name" name="name" value="<%=candidate.getName()%>">
+                        <label>Город:</label>
+                        <div>
+                            <select id="city" name="cityValue" onchange="OnSelectionChange (this)">
+                                <option value=0>Выберите город</option>
+                            </select>
+                        </div>
+                        </br>
+                        <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>
                     </div>
-                    <div class="form-group">
-                        <label>Опыт работы</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    </br>
-                    <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>
                 </form>
             </div>
         </div>

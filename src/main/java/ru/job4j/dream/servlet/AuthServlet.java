@@ -24,7 +24,7 @@ public class AuthServlet extends HttpServlet {
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
         String password = req.getParameter("password");
-        //assert user != null;
+        assert user != null;
         if (!user.getPassword().equals(password)) {
             req.setAttribute("error", "Неправильный пароль");
             req.getRequestDispatcher("login.jsp").forward(req, resp);

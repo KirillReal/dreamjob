@@ -46,5 +46,4 @@ public interface Store {
     Collection<String> findAllCities();
 
     String findByIdCity(int id);
-
 }

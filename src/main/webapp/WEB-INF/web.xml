@@ -103,5 +103,4 @@
     <servlet-name>CityServlet</servlet-name>
     <url-pattern>/city</url-pattern>
   </servlet-mapping>
-
 </web-app>

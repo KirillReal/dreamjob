@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -40,7 +40,6 @@
 
     <title>Работа мечты</title>
 </head>
-<body>
 <div class="container">
     <div class="row">
         <ul class="nav">
@@ -62,6 +61,7 @@
         </ul>
     </div>
 </div>
+<body>
 <div class="container pt-3">
     <h2>Upload image</h2>
     <form action="<c:url value='/upload?candidateId=${candidateId}'/>" method="post"  enctype="multipart/form-data">

@@ -12,7 +12,8 @@ import java.io.IOException;
 public class DownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Integer idPhoto = Integer.parseInt(req.getParameter("name"));
+        int idPhoto = Integer.parseInt(req.getParameter("name"));
+        req.setAttribute("user", req.getSession().getAttribute("user"));
         String name =  PsqlStore.instOf().getImage(idPhoto);
         resp.setContentType("name=" + name);
         resp.setContentType("image/png");

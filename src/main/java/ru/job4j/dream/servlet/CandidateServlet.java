@@ -13,6 +13,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CandidateServlet extends HttpServlet {
+
+    private static final Map<Integer, Integer> CITY_MAPPING = new HashMap<>();
+
+    static {
+        CITY_MAPPING.put(1, 5);
+        CITY_MAPPING.put(2, 7);
+        CITY_MAPPING.put(3, 8);
+        CITY_MAPPING.put(4, 9);
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -31,8 +41,9 @@ public class CandidateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         Candidate candidate = new Candidate(Integer.parseInt(req.getParameter("id")),
                 req.getParameter("name"),
-                0, Integer.parseInt(req.getParameter("cityValue")));
+                0, CITY_MAPPING.get(Integer.parseInt(req.getParameter("cityValue"))));
         PsqlStore.instOf().save(candidate);
         resp.sendRedirect(req.getContextPath() + "/upload" + "?candidateId=" + candidate.getId());
+        //resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

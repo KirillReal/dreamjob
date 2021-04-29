@@ -89,6 +89,7 @@
                                      height="100px"/>
                             </td>
                         </tr>
+
                     </c:forEach>
                     </tbody>
                 </table>
