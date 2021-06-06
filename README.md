@@ -17,6 +17,22 @@
 * JUnit, Mockito, PowerMock
 * Maven, Tomcat
 
+# Общая информация 
+Основной функционал приложения доступен зарегистрированным пользователям. Новым клиентам доступен раздел регистрации и авторизации. Это достигается за счет фильтрации всех запросов в ru.job4j.dream.filter.AuthFilter. Сам фильтр (и все сервлеты) подключается к проекту в src/main/webapp/WEB-INF/web.xml
+Все операции сохранения/изменения/получения пользовательских данных описаны в интерфейсе ru.job4j.dream.store.Store
+# Регситрация
+
+# Адреса
+/reg.do /auth.do
+
+# Сервлеты
+ru.job4j.dream.servlet.RegServlet ru.job4j.dream.servlet.AuthServlet
+
+# Модели
+
+ru.job4j.dream.model.User
+
+Не авторизованному пользователю доступны только эти две страницы.
 ![ScreenShot](images/images1.png)
 
 ![ScreenShot](images/Login.png)
