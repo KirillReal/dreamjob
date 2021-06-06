@@ -32,10 +32,13 @@ ru.job4j.dream.servlet.RegServlet ru.job4j.dream.servlet.AuthServlet
 
 ru.job4j.dream.model.User
 
-Не авторизованному пользователю доступны только эти две страницы.
-![ScreenShot](images/images1.png)
+Не авторизованному пользователю доступны только эти страницы.
 
 ![ScreenShot](images/Login.png)
+
+После успешной авторизации/регистрации пользователь попадает на главную страницу. Здесь отображаются свежие вакансии и новые кандидаты что были добавлены за текущий день. Для выхода из приложения нужно кликнуть на кнопку "выйти" в верхнем меню.
+
+![ScreenShot](images/images1.png)
 
 ![ScreenShot](images/Posts.png)
 
